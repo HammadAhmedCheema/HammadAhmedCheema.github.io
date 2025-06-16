@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Samurai | CTF Top 1% | Reverse Engineer</title>
+    
+    <!-- Samurai Meta Tags -->
+    <meta name="description" content="Digital warrior specializing in offensive security, malware analysis, and purple team operations">
+    <meta name="keywords" content="samurai,hacker,cybersecurity,malware,reverse engineering,CTF,purple team">
+    
+    <!-- Favicon with Katana Icon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="alternate icon" href="assets/favicon.ico">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="assets/katana.webp" as="image">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*; font-src 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Cyber Samurai",
+        "jobTitle": "Cybersecurity Specialist",
+        "skills": "Reverse Engineering, Malware Analysis, Exploit Development",
+        "url": "https://yourportfolio.com",
+        "sameAs": [
+            "https://tryhackme.com/p/yourprofile",
+            "https://github.com/yourusername"
+        ]
+    }
+    </script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Share+Tech+Mono&display=swap">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-katana">
+            <div class="blade"></div>
+            <div class="handle"></div>
+        </div>
+        <div class="loading-text">
+            <span class="loading-char">侍</span>
+            <span class="loading-char">武</span>
+            <span class="loading-char">忍</span>
+        </div>
+    </div>
+
+    <!-- Cursor Effects -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+    
+    <!-- Blood Splatter Decoration -->
+    <div class="blood-splatter" id="splatter1"></div>
+    <div class="blood-splatter" id="splatter2"></div>
+    <div class="blood-splatter" id="splatter3"></div>
+    
+    <!-- Main Navigation -->
+    <nav class="samurai-nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="kanji">侍</span>
+                <span class="text">CYBER_SAMURAI</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#home" class="nav-link" data-text="HOME">HOME</a>
+                <a href="#skills" class="nav-link" data-text="SKILLS">SKILLS</a>
+                <a href="#achievements" class="nav-link" data-text="CTF">CTF</a>
+                <a href="#projects" class="nav-link" data-text="PROJECTS">PROJECTS</a>
+                <a href="#blog" class="nav-link" data-text="SCROLLS">SCROLLS</a>
+                <a href="#contact" class="nav-link" data-text="CONTACT">CONTACT</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <span class="sun">☀</span>
+                    <span class="moon">☾</span>
+                </button>
+                <button class="terminal-toggle" aria-label="Open terminal">
+                    <span>$_</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Katana Divider -->
+        <div class="nav-divider">
+            <div class="katana-slash"></div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-line"><span class="red-slash">//</span> I AM</span>
+                        <span class="title-line typing-text" data-strings='["CYBER SAMURAI", "MALWARE HUNTER", "REVERSE ENGINEER", "PURPLE TEAMER"]'></span>
+                    </h1>
+                    
+                    <div class="hero-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">whoami.sh</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">
+                                <span class="prompt">$</span> whois cyber_samurai
+                            </div>
+                            <div class="terminal-line output">
+                                > Cybersecurity warrior specializing in offensive operations<br>
+                                > Top 1% CTF player on TryHackMe & HackTheBox<br>
+                                > Malware reverse engineer & exploit developer<br>
+                                > Purple team strategist
+                            </div>
+                            <div class="terminal-line">
+                                <span class="prompt">$</span> <span class="typing" data-text="find ./skills --type=reverse_engineering"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#contact" class="hero-btn">
+                            <span class="btn-text">SEND MISSION</span>
+                            <span class="btn-icon">⚔</span>
+                        </a>
+                        <a href="#skills" class="hero-btn secondary">
+                            <span class="btn-text">VIEW SKILLS</span>
+                            <span class="btn-icon">🛡</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="katana-3d" id="katana-model"></div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="99">0</div>
+                            <div class="stat-label">CTF ROOMS</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="42">0</div>
+                            <div class="stat-label">MALWARE SAMPLES</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="7">0</div>
+                            <div class="stat-label">CVE CONTRIBUTIONS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <div class="scroll-text">BEGIN JOURNEY</div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-decor">//</span> 
+                    <span class="title-text">BUSHIDO CODE</span>
+                    <span class="title-kanji">武</span>
+                </h2>
+                <p class="section-subtitle">The way of the cyber warrior</p>
+                
+                <!-- Katana Slash Divider -->
+                <div class="section-divider">
+                    <div class="katana-slash"></div>
+                </div>
+            </div>
+            
+            <div class="skills-container">
+                <!-- Skill Category 1 -->
+                <div class="skill-category">
+                    <h3 class="category-title">OFFENSIVE</h3>
+                    <div class="category-items">
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <img src="assets/icons/binary.svg" alt="Binary icon" loading="lazy">
+                                <div class="blood-drip"></div>
+                            </div>
+                            <div class="skill-info">
+                                <h4 class="skill-name">Reverse Engineering</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="95"></div>
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Ghidra</span>
+                                    <span class="skill-tag">x64dbg</span>
+                                    <span class="skill-tag">IDA Pro</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <img src="assets/icons/exploit.svg" alt="Exploit icon" loading="lazy">
+                                <div class="blood-drip"></div>
+                            </div>
+                            <div class="skill-info">
+                                <h4 class="skill-name">Exploit Development</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="85"></div>
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">ROP Chains</span>
+                                    <span class="skill-tag">Shellcoding</span>
+                                    <span class="skill-tag">Binary Exploitation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Category 2 -->
+                <div class="skill-category">
+                    <h3 class="category-title">DEFENSIVE</h3>
+                    <div class="category-items">
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <img src="assets/icons/malware.svg" alt="Malware icon" loading="lazy">
+                                <div class="blood-drip"></div>
+                            </div>
+                            <div class="skill-info">
+                                <h4 class="skill-name">Malware Analysis</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Static Analysis</span>
+                                    <span class="skill-tag">Dynamic Analysis</span>
+                                    <span class="skill-tag">YARA Rules</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-icon">
+                                <img src="assets/icons/shield.svg" alt="Shield icon" loading="lazy">
+                                <div class="blood-drip"></div>
+                            </div>
+                            <div class="skill-info">
+                                <h4 class="skill-name">Purple Teaming</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="88"></div>
+                                </div>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">MITRE ATT&CK</span>
+                                    <span class="skill-tag">SIEM</span>
+                                    <span class="skill-tag">EDR Evasion</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skill Category 3 -->
+                <div class="skill-category">
+                    <h3 class="category-title">TOOLS</h3>
+                    <div class="category-items">
+                        <div class="tool-grid">
+                            <div class="tool-item" data-tooltip="Ghidra">
+                                <img src="assets/tools/ghidra.svg" alt="Ghidra" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="IDA Pro">
+                                <img src="assets/tools/ida.svg" alt="IDA Pro" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="x64dbg">
+                                <img src="assets/tools/x64dbg.svg" alt="x64dbg" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="Burp Suite">
+                                <img src="assets/tools/burp.svg" alt="Burp Suite" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="Radare2">
+                                <img src="assets/tools/radare2.svg" alt="Radare2" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="Cutter">
+                                <img src="assets/tools/cutter.svg" alt="Cutter" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="Wireshark">
+                                <img src="assets/tools/wireshark.svg" alt="Wireshark" loading="lazy">
+                            </div>
+                            <div class="tool-item" data-tooltip="Metasploit">
+                                <img src="assets/tools/metasploit.svg" alt="Metasploit" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTF Achievements Section -->
+        <section id="achievements" class="achievements-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-decor">//</span> 
+                    <span class="title-text">CTF TROPHIES</span>
+                    <span class="title-kanji">勝</span>
+                </h2>
+                <p class="section-subtitle">Conquered battlefields</p>
+                
+                <!-- Katana Slash Divider -->
+                <div class="section-divider">
+                    <div class="katana-slash"></div>
+                </div>
+            </div>
+            
+            <div class="achievements-container">
+                <!-- TryHackMe Stats -->
+                <div class="thm-stats">
+                    <div class="thm-header">
+                        <img src="assets/thm-logo.webp" alt="TryHackMe" class="thm-logo" loading="lazy">
+                        <div class="thm-rank">
+                            <span class="rank-label">TOP</span>
+                            <span class="rank-value">1%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thm-grid">
+                        <div class="thm-stat">
+                            <div class="stat-value" data-count="99">0</div>
+                            <div class="stat-label">ROOMS</div>
+                        </div>
+                        <div class="thm-stat">
+                            <div class="stat-value" data-count="42">0</div>
+                            <div class="stat-label">MACHINES</div>
+                        </div>
+                        <div class="thm-stat">
+                            <div class="stat-value" data-count="15">0</div>
+                            <div class="stat-label">SKILLS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="thm-badges">
+                        <h4 class="badges-title">NOTABLE BADGES</h4>
+                        <div class="badges-grid">
+                            <div class="badge-item" data-badge="Offensive Pentesting">
+                                <img src="assets/badges/offensive.svg" alt="Offensive Pentesting" loading="lazy">
+                            </div>
+                            <div class="badge-item" data-badge="Reverse Engineering">
+                                <img src="assets/badges/reverse.svg" alt="Reverse Engineering" loading="lazy">
+                            </div>
+                            <div class="badge-item" data-badge="Binary Exploitation">
+                                <img src="assets/badges/binexp.svg" alt="Binary Exploitation" loading="lazy">
+                            </div>
+                            <div class="badge-item" data-badge="Malware Analysis">
+                                <img src="assets/badges/malware.svg" alt="Malware Analysis" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HackTheBox Stats -->
+                <div class="htb-stats">
+                    <div class="htb-header">
+                        <img src="assets/htb-logo.webp" alt="HackTheBox" class="htb-logo" loading="lazy">
+                        <div class="htb-rank">
+                            <span class="rank-label">RANK</span>
+                            <span class="rank-value">Hacker</span>
+                        </div>
+                    </div>
+                    
+                    <div class="htb-grid">
+                        <div class="htb-stat">
+                            <div class="stat-value" data-count="27">0</div>
+                            <div class="stat-label">MACHINES</div>
+                        </div>
+                        <div class="htb-stat">
+                            <div class="stat-value" data-count="15">0</div>
+                            <div class="stat-label">CHALLENGES</div>
+                        </div>
+                        <div class="htb-stat">
+                            <div class="stat-value" data-count="8">0</div>
+                            <div class="stat-label">FORTESSES</div>
+                        </div>
+                    </div>
+                    
+                    <div class="htb-progress">
+                        <h4 class="progress-title">SKILLS DISTRIBUTION</h4>
+                        <div class="progress-bars">
+                            <div class="progress-item">
+                                <div class="progress-label">Exploitation</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">Reversing</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">Crypto</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="70"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">Web</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTF Gallery -->
+            <div class="ctf-gallery">
+                <h3 class="gallery-title">RECENT CONQUESTS</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="assets/ctf/ctf1.webp" alt="CTF Challenge" loading="lazy">
+                        <div class="item-overlay">
+                            <h4>Malware Unchained</h4>
+                            <p>Analyzed and cracked ransomware sample</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/ctf/ctf2.webp" alt="CTF Challenge" loading="lazy">
+                        <div class="item-overlay">
+                            <h4>Ghost in the Shell</h4>
+                            <p>Rooted Linux box via kernel exploit</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/ctf/ctf3.webp" alt="CTF Challenge" loading="lazy">
+                        <div class="item-overlay">
+                            <h4>Ronin's Revenge</h4>
+                            <p>Custom ROP chain exploit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-decor">//</span> 
+                    <span class="title-text">BATTLE SCROLLS</span>
+                    <span class="title-kanji">巻</span>
+                </h2>
+                <p class="section-subtitle">Chronicles of cyber warfare</p>
+                
+                <!-- Katana Slash Divider -->
+                <div class="section-divider">
+                    <div class="katana-slash"></div>
+                </div>
+            </div>
+            
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Ronin Debugger</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">x86/x64</span>
+                            <span class="project-tag">WinAPI</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-desc">
+                            Custom debugger with anti-anti-debugging techniques, process hollowing detection, and stealth breakpoints.
+                        </p>
+                        <div class="project-features">
+                            <ul class="feature-list">
+                                <li>Hardware breakpoint evasion</li>
+                                <li>Memory scanning engine</li>
+                                <li>Scriptable Python interface</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="#" class="project-link" data-text="VIEW SOURCE">VIEW SOURCE</a>
+                        <a href="#" class="project-link" data-text="READ DOCS">READ DOCS</a>
+                    </div>
+                    <div class="project-bg">
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Shogun Sandbox</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Cuckoo</span>
+                            <span class="project-tag">YARA</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-desc">
+                            Automated malware analysis framework with behavior monitoring, API hooking, and network traffic analysis.
+                        </p>
+                        <div class="project-features">
+                            <ul class="feature-list">
+                                <li>Custom YARA rule generator</li>
+                                <li>Evasion technique detection</li>
+                                <li>Threat intelligence integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="#" class="project-link" data-text="VIEW SOURCE">VIEW SOURCE</a>
+                        <a href="#" class="project-link" data-text="READ DOCS">READ DOCS</a>
+                    </div>
+                    <div class="project-bg">
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Bushido Framework</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">.NET</span>
+                            <span class="project-tag">Red Team</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-desc">
+                            Modular post-exploitation framework with EDR evasion, credential harvesting, and lateral movement modules.
+                        </p>
+                        <div class="project-features">
+                            <ul class="feature-list">
+                                <li>Direct syscall execution</li>
+                                <li>Process hollowing techniques</li>
+                                <li>Custom C2 channels</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <a href="#" class="project-link" data-text="VIEW SOURCE">VIEW SOURCE</a>
+                        <a href="#" class="project-link" data-text="READ DOCS">READ DOCS</a>
+                    </div>
+                    <div class="project-bg">
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="blog-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-decor">//</span> 
+                    <span class="title-text">SENSEI'S SCROLLS</span>
+                    <span class="title-kanji">知</span>
+                </h2>
+                <p class="section-subtitle">Wisdom from the battlefield</p>
+                
+                <!-- Katana Slash Divider -->
+                <div class="section-divider">
+                    <div class="katana-slash"></div>
+                </div>
+            </div>
+            
+            <div class="blog-container">
+                <!-- Blog Post 1 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <time class="post-date" datetime="2023-10-15">15.10.2023</time>
+                        <h3 class="post-title">Dissecting Ryuk: A Ronin's Approach</h3>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">
+                            Deep dive into Ryuk ransomware's anti-analysis techniques, with custom deobfuscation scripts and behavioral analysis.
+                        </p>
+                        <div class="post-meta">
+                            <span class="meta-tag">Malware Analysis</span>
+                            <span class="meta-tag">Reverse Engineering</span>
+                            <span class="meta-tag">Ransomware</span>
+                        </div>
+                    </div>
+                    <a href="#" class="post-link" data-text="READ SCROLL">READ SCROLL</a>
+                    <div class="post-decoration">
+                        <div class="scroll-handle"></div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post 2 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <time class="post-date" datetime="2023-09-28">28.09.2023</time>
+                        <h3 class="post-title">The Way of the ROP: Modern Binary Exploitation</h3>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">
+                            Crafting reliable ROP chains against modern mitigations (ASLR, DEP, CFG) with case studies from HTB machines.
+                        </p>
+                        <div class="post-meta">
+                            <span class="meta-tag">Exploit Dev</span>
+                            <span class="meta-tag">Binary Security</span>
+                            <span class="meta-tag">ROP</span>
+                        </div>
+                    </div>
+                    <a href="#" class="post-link" data-text="READ SCROLL">READ SCROLL</a>
+                    <div class="post-decoration">
+                        <div class="scroll-handle"></div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post 3 -->
+                <article class="blog-post">
+                    <div class="post-header">
+                        <time class="post-date" datetime="2023-09-10">10.09.2023</time>
+                        <h3 class="post-title">Shadow Blade: EDR Evasion Techniques</h3>
+                    </div>
+                    <div class="post-content">
+                        <p class="post-excerpt">
+                            Testing and bypassing enterprise EDR solutions using direct syscalls, unhooking, and memory manipulation.
+                        </p>
+                        <div class="post-meta">
+                            <span class="meta-tag">Red Team</span>
+                            <span class="meta-tag">EDR</span>
+                            <span class="meta-tag">Evasion</span>
+                        </div>
+                    </div>
+                    <a href="#" class="post-link" data-text="READ SCROLL">READ SCROLL</a>
+                    <div class="post-decoration">
+                        <div class="scroll-handle"></div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="blog-actions">
+                <a href="#" class="blog-btn">
+                    <span class="btn-text">VIEW ARCHIVES</span>
+                    <span class="btn-icon">📜</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-decor">//</span> 
+                    <span class="title-text">SEND A NINJA RAVEN</span>
+                    <span class="title-kanji">鴉</span>
+                </h2>
+                <p class="section-subtitle">For secret missions and collaborations</p>
+                
+                <!-- Katana Slash Divider -->
+                <div class="section-divider">
+                    <div class="katana-slash"></div>
+                </div>
+            </div>
+            
+            <div class="contact-container">
+                <form class="contact-form" id="mission-form">
+                    <div class="form-group">
+                        <label for="mission-name" class="form-label">YOUR CODENAME</label>
+                        <input type="text" id="mission-name" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mission-email" class="form-label">SECRET PIGEON</label>
+                        <input type="email" id="mission-email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mission-subject" class="form-label">MISSION TYPE</label>
+                        <select id="mission-subject" name="subject" class="form-select">
+                            <option value="ctf">CTF Challenge</option>
+                            <option value="malware">Malware Analysis</option>
+                            <option value="consulting">Security Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mission-message" class="form-label">ENCRYPTED MESSAGE</label>
+                        <textarea id="mission-message" name="message" class="form-textarea" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="form-submit">
+                            <span class="btn-text">SEND RAVEN</span>
+                            <span class="btn-icon">✉</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3 class="info-title">ENCRYPTED CHANNELS</h3>
+                        <ul class="info-list">
+                            <li>
+                                <span class="info-icon">✉</span>
+                                <a href="mailto:ronin@cybersamurai.com" class="info-link">ronin@cybersamurai.com</a>
+                            </li>
+                            <li>
+                                <span class="info-icon">🔑</span>
+                                <a href="#" class="info-link">PGP Key</a>
+                            </li>
+                            <li>
+                                <span class="info-icon">#</span>
+                                <a href="#" class="info-link">Signal: +1 234-567-890</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="info-title">SOCIAL DOJO</h3>
+                        <div class="social-grid">
+                            <a href="#" class="social-link" data-tooltip="GitHub">
+                                <img src="assets/social/github.svg" alt="GitHub" loading="lazy">
+                            </a>
+                            <a href="#" class="social-link" data-tooltip="TryHackMe">
+                                <img src="assets/social/thm.svg" alt="TryHackMe" loading="lazy">
+                            </a>
+                            <a href="#" class="social-link" data-tooltip="HackTheBox">
+                                <img src="assets/social/htb.svg" alt="HackTheBox" loading="lazy">
+                            </a>
+                            <a href="#" class="social-link" data-tooltip="Twitter">
+                                <img src="assets/social/twitter.svg" alt="Twitter" loading="lazy">
+                            </a>
+                            <a href="#" class="social-link" data-tooltip="LinkedIn">
+                                <img src="assets/social/linkedin.svg" alt="LinkedIn" loading="lazy">
+                            </a>
+                            <a href="#" class="social-link" data-tooltip="Discord">
+                                <img src="assets/social/discord.svg" alt="Discord" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="samurai-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <span class="kanji">侍</span>
+                <span class="text">CYBER_SAMURAI</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#home" class="footer-link">Home</a>
+                <a href="#skills" class="footer-link">Skills</a>
+                <a href="#achievements" class="footer-link">CTF</a>
+                <a href="#projects" class="footer-link">Projects</a>
+                <a href="#blog" class="footer-link">Scrolls</a>
+                <a href="#contact" class="footer-link">Contact</a>
+            </div>
+            
+            <div class="footer-legal">
+                <p class="copyright">© 2023 Cyber Samurai. All rights reserved.</p>
+                <p class="disclaimer">This website is for educational purposes only.</p>
+                <a href="/security.txt" class="security-link">Security Policy</a>
+            </div>
+        </div>
+        
+        <!-- Blood Splatter Decoration -->
+        <div class="footer-splatter"></div>
+    </footer>
+
+    <!-- Floating Terminal -->
+    <div class="floating-terminal">
+        <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">cyber_samurai --login</span>
+            <button class="terminal-close">×</button>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+            <!-- Terminal content will be injected via JS -->
+        </div>
+        <div class="terminal-input">
+            <span class="prompt">$</span>
+            <input type="text" class="command-input" placeholder="Type 'help' for commands">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Security Verification -->
+    <script type="text/plain" src="/.well-known/security.txt"></script>
+</body>
+</html>
