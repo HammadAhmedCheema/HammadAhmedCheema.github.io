@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Cyber Samurai Portfolio - Animation Styles
+   ========================================================================== */
+
+/* Blood Drip Animation */
+@keyframes blood-drip {
+    0% {
+        height: 0;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        height: 20px;
+        opacity: 1;
+    }
+}
+
+/* Katana Slash Effect */
+@keyframes katana-slash {
+    0% {
+        transform: translateX(-100%) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* Floating Katana */
+@keyframes float-katana {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+/* Terminal Typing */
+@keyframes terminal-typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Hacker Matrix Effect */
+@keyframes matrix-fall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    2% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Binary Flicker */
+@keyframes binary-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 22%, 24%, 55% {
+        opacity: 0.2;
+    }
+}
+
+/* Cyber Glow */
+@keyframes cyber-glow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(178, 34, 34, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(178, 34, 34, 0.9), 
+                     0 0 25px rgba(178, 34, 34, 0.7);
+    }
+}
+
+/* Scan Line */
+@keyframes scan-line {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Cursor Blink */
+@keyframes cursor-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Number Counter */
+@keyframes counter-increment {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hex Grid Pulse */
+@keyframes hex-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+}
+
+/* Blood Splatter Appear */
+@keyframes blood-appear {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 0.1;
+    }
+}
+
+/* Error Glitch */
+@keyframes error-glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-3px, 3px);
+    }
+    40% {
+        transform: translate(-3px, -3px);
+    }
+    60% {
+        transform: translate(3px, 3px);
+    }
+    80% {
+        transform: translate(3px, -3px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* Loading Bar */
+@keyframes loading-bar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Kanji Stamp */
+@keyframes kanji-stamp {
+    0% {
+        transform: scale(5);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Digital Rain */
+@keyframes digital-rain {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 100vh;
+    }
+}
+
+/* Scroll Reveal */
+@keyframes scroll-reveal {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* ==========================================================================
+   Animation Classes
+   ========================================================================== */
+
+/* Blood Drip Effect */
+.blood-drip-animate {
+    animation: blood-drip 1.5s ease-out forwards;
+}
+
+/* Katana Slash */
+.katana-slash-animate {
+    animation: katana-slash 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Floating Elements */
+.float-animate {
+    animation: float-katana 6s ease-in-out infinite;
+}
+
+/* Terminal Typing */
+.typing-animate {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: terminal-typing 3s steps(40, end) forwards;
+}
+
+/* Matrix Background */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0.5) 50%, 
+        rgba(0, 0, 0, 0.9) 100%);
+}
+
+.matrix-char {
+    position: absolute;
+    color: #0f0;
+    font-family: var(--font-mono);
+    animation: matrix-fall linear infinite;
+}
+
+/* Cyber Glow Text */
+.cyber-glow {
+    animation: cyber-glow 3s ease-in-out infinite;
+}
+
+/* Scan Line Overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 255, 0, 0.05) 50%,
+        transparent 100%
+    );
+    animation: scan-line 8s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Cursor Effects */
+.cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+}
+
+/* Counter Animation */
+.counter-animate {
+    animation: counter-increment 0.5s ease-out forwards;
+}
+
+/* Hex Grid Effects */
+.hex-pulse {
+    animation: hex-pulse 4s ease-in-out infinite;
+}
+
+/* Blood Splatter Intro */
+.blood-intro {
+    animation: blood-appear 1s ease-out forwards;
+}
+
+/* Error/Glitch Effect */
+.glitch-effect {
+    animation: error-glitch 0.5s linear infinite;
+}
+
+/* Loading Bar */
+.loading-bar {
+    height: 4px;
+    background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent));
+    animation: loading-bar 3s ease-out forwards;
+}
+
+/* Kanji Stamp Effect */
+.kanji-stamp {
+    animation: kanji-stamp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Digital Rain Background */
+.digital-rain {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="15" fill="rgba(0,255,0,0.3)" font-family="monospace" font-size="16">01</text></svg>');
+    animation: digital-rain 1s linear infinite;
+}
+
+/* Scroll Reveal Animation */
+.scroll-reveal {
+    animation: scroll-reveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* Binary Flicker Effect */
+.binary-flicker {
+    animation: binary-flicker 5s linear infinite;
+}
+
+/* Section Entrance Animations */
+.section-entrance {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-entrance.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay Classes */
+.delay-1 {
+    animation-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+    transition-delay: 0.4s;
+}
+
+.delay-5 {
+    animation-delay: 0.5s;
+    transition-delay: 0.5s;
+}
+
+/* ==========================================================================
+   Theme Transition Effects
+   ========================================================================== */
+
+.theme-transition * {
+    transition: background-color 0.5s ease, 
+                color 0.5s ease, 
+                border-color 0.5s ease;
+}
+
+/* ==========================================================================
+   Responsive Animations
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .float-animate {
+        animation: float-katana 8s ease-in-out infinite;
+    }
+    
+    .typing-animate {
+        animation: terminal-typing 2s steps(30, end) forwards;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .section-entrance {
+        opacity: 1;
+        transform: none;
+    }
+}
