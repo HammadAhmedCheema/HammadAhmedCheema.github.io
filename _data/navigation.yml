@@ -1,9 +1,11 @@
 main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "About"
-    url: /about/
+  - title: "Malware Analysis"
+    url: /categories/#malware-analysis
+  - title: "Binary Exploitation"
+    url: /categories/#binary-exploitation
+  - title: "CTF Writeups"
+    url: /categories/#ctf-writeups
+  - title: "Tutorials"
+    url: /categories/#tutorials
+  - title: "All Categories"
+    url: /categories
