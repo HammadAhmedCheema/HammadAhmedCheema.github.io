@@ -1,11 +1,11 @@
 main:
   - title: "Binary Exploitation"
-    url: /categories/#binary-exploitation
+    url: /binary-exploitation
   - title: "CTF Writeups"
-    url: /categories/#ctf-writeups
+    url: /ctf-writeups
   - title: "Tutorials"
-    url: /categories/#tutorials
+    url: /tutorials
   - title: "Malware Analysis"
-    url: /categories/#malware-analysis
+    url: /malware-analysis
   - title: "All Categories"
-    url: /categories
+    url: /_posts/
