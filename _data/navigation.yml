@@ -1,6 +1,6 @@
 main:
   - title: "Binary Exploitation"
-    url: /_posts/#binary-exploitation
+    url: /categories/#binary-exploitation
   - title: "CTF Writeups"
     url: /categories/#ctf-writeups
   - title: "Tutorials"
