@@ -161,7 +161,7 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
-  since: "2013"
+  since: "2025"
 
 
 # Reading Files
@@ -321,11 +321,10 @@ defaults:
       path: ""
       type: posts
     values:
-      read_time : true
       show_date : true
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
