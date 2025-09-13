@@ -5,6 +5,7 @@
 layout: single
 author_profile: true
 ---
+
 # I'm Hammad Ahmed!
 
 ## 👨‍💻 About Me
@@ -28,4 +29,5 @@ I actively participate in **Capture the Flag (CTF)** competitions, sharpening my
 - **Hogwarts Sorting Algorithm**: Designed a graph-based algorithm to sort students into Hogwarts houses based on their attributes.
 - **Cafe management System**: Designed a terminal based cafe management system , to handle the daily activites of a cafe.
 - **PACMAN IN ASSEMBLY** : Implemented The pacman game from scratch in MASM32 using irvine library.
+  
 ---
