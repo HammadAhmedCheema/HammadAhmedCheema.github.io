@@ -2,11 +2,10 @@
 # You don't need to edit this file, it's empty on purpose.
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: single
+layout: hoe
 author_profile: true
 ---
 
----
 ## 👨‍💻 About Me
 I am an **undergraduate Cyber Security student** at **FAST National University** with a strong passion for problem-solving and programming. I have a **solid foundation in C++** and an excellent grasp of its concepts.  
 
