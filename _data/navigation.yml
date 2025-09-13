@@ -7,6 +7,6 @@ main:
     url: /categories/#ctf-writeups
   - title: "All Categories"
     url: /categories/
-  - title: "Tutorial"
-    url: /categories/#tutorial
+  - title: "Tutorials"
+    url: /categories/#tutorials
 
