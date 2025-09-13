@@ -1,13 +1,13 @@
 main:
-  - title: "Posts"
-    url: /posts/
+  - title: "Malware Analysis"
+    url: /categories/#/malware-analysis
   - title: "Binary Exploitation"
     url: /categories/#binary-exploitation
-  - title: "Categories"
+  - title: "All Categories"
     url: /categories/
   - title: "Tags"
     url: /tags/
-  - title: "About"
-    url: /about/
-  - title: "Blog"
-    url: /categories/#Blog
+  - title: "Tutorial"
+    url: /categories/#tutorial
+  - title: "CTF Writeups"
+    url: /categories/#ctf-writeups
