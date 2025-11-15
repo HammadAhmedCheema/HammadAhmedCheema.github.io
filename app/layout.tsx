@@ -72,11 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         sizes="76x76"
         href={`${basePath}/static/favicons/apple-touch-icon.png`}
       />
-      <link
-        rel="icon"
-        type="image/svg+xml"
-        href={`${basePath}/static/favicons/shifu.svg`}
-      />
+      <link rel="icon" type="image/svg+xml" href={`${basePath}/static/favicons/shifu.svg`} />
       <link
         rel="icon"
         type="image/png"
