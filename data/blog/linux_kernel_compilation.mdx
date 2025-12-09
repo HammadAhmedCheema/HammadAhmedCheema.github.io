@@ -98,7 +98,7 @@ Extract it and
 cd linux-5.15.196
 ```
 
-![Kernel Directory](images/Pasted_image_20251121135927.png)
+![Kernel Directory](/static/images/Pasted_image_20251121135927.png)
 
 Install the Dependencies 
 
@@ -106,7 +106,7 @@ Install the Dependencies
 sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
 ```
 
-![](images/Pasted_image_20251121140027.png)
+![](/static/images/Pasted_image_20251121140027.png)
 
 The command we used above installs the following packages:
 
@@ -141,7 +141,7 @@ SYSCALL_DEFINE2(mkdir_2045_2050, const char __user *, pathname, umode_t, mode)
 }
 ```
 
-![](images/Pasted_image_20251121140206.png)
+![](/static/images/Pasted_image_20251121140206.png)
 
 **arch/x86/entry/syscalls/syscall_64.tbl:** Containt the link to all the syscalls 
 We gonna add link to our custom defined syscall here 
@@ -151,7 +151,7 @@ We gonna add link to our custom defined syscall here
 ```
 
 At first i tried to overwrite the orignal 'mkdir' entry in syscall table , but i failed at boot time cause it was looking for mkdir instead of my custom version . So I just add the new entry on with an unused & unreserved number i.e 451
-![](images/Pasted_image_20251121140501.png)
+![](/static/images/Pasted_image_20251121140501.png)
 make sure to add it in right number position i.e    452 > 451 >450 
 ### Compilation Setup
 
@@ -161,7 +161,7 @@ In your installed kernel directory
 cp -v /boot/config-$(uname -r) .config
 ```
 
-![](images/Pasted_image_20251121141055.png)
+![](/static/images/Pasted_image_20251121141055.png)
 
 2. To make changes to configuration file run 
 ```bash 
@@ -171,11 +171,11 @@ make menuconfig
 # navigation by tab , arrow keys , and enter 
 ```
 
-![](images/Pasted_image_20251121141144.png)
+![](/static/images/Pasted_image_20251121141144.png)
 
-![](images/Pasted_image_20251121141157.png)
+![](/static/images/Pasted_image_20251121141157.png)
 
-![](images/Pasted_image_20251121141229.png)
+![](/static/images/Pasted_image_20251121141229.png)
 
 3. Next step is to compile our kenel but we will probably get an error about certification why 
 	- **Secure Boot**: Modern kernels require signed modules for security
@@ -197,7 +197,7 @@ scripts/config --set-str SYSTEM_TRUSTED_KEYS ""
 scripts/config --set-str SYSTEM_REVOCATION_KEYS ""
 ```
 
-![](images/Pasted_image_20251121141326.png)
+![](/static/images/Pasted_image_20251121141326.png)
 
 4. Now we can build or kernel 
 ```bash 
@@ -208,18 +208,18 @@ make
 make -j$(nproc) #speed up our compilation by max utilizing our cpu
 ```
 
-![](images/Pasted_image_20251121141432.png)
+![](/static/images/Pasted_image_20251121141432.png)
 
 	It will take a lot of time for me it took like 2-4 hours to compile sometime(it's just 70-90 mins , dont know why ) 
 
-![](images/Pasted_image_20251121141503.png)
+![](/static/images/Pasted_image_20251121141503.png)
 
 5.  Installing the required modules 
    ```bash
    sudo make modules_install
    ```
 
-![](images/Pasted_image_20251121141644.png)
+![](/static/images/Pasted_image_20251121141644.png)
 
 5. Finally install the kernel 
 ```bash
@@ -228,7 +228,7 @@ sudo make install
 sudo update-grub
 ```
 
-![](images/Pasted_image_20251121141732.png)
+![](/static/images/Pasted_image_20251121141732.png)
 
 
 ### Booting 
@@ -238,17 +238,17 @@ sudo update-grub
 	3. Select Advanced options -> boot into your newly installed kernel 
 	4.  After machine boots up check with `uname -r` you will see your installed kernel version 
 
-![](images/Pasted_image_20251121141906.png)
+![](/static/images/Pasted_image_20251121141906.png)
 
-![](images/Pasted_image_20251121141937.png)
+![](/static/images/Pasted_image_20251121141937.png)
 
-![](images/Pasted_image_20251121163102.png)
+![](/static/images/Pasted_image_20251121163102.png)
 
 
 ### Testing our wrapper 
 
 1.  made a simple C function that will call our wrapper syscall 
-		 ![](images/Pasted_image_20251121164855.png)
+		 ![](/static/images/Pasted_image_20251121164855.png)
 ```C
 #include <stdio.h>
 #include <unistd.h>
@@ -262,10 +262,10 @@ int main() {
 ```
 	
 2.  As we can clearly see in below screenshot our syscall wrapper works fine 
-		![](images/Pasted_image_20251121164204.png)
+		![](/static/images/Pasted_image_20251121164204.png)
 
 3.  Kernal Logs  , our desired kernel logs have also been produced 
-		![](images/Pasted_image_20251121164322.png)
+		![](/static/images/Pasted_image_20251121164322.png)
 
 
 #### And thats All . . .

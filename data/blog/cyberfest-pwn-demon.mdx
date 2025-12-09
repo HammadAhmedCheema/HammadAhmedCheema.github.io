@@ -14,21 +14,21 @@ authors: ['default']
 
 In this challenge we were given binary named demon
 
-![alt text](images/demon-1.png)
+![alt text](/static/images/demon-1.png)
 
 lets run and see what it do
 
-![alt text](images/demon-2.png)
+![alt text](/static/images/demon-2.png)
 
 seems like a game ..... , after playing it for a while i figure we cant beat it faily
 
 okay lets fire up ghidra and see what is under the hood
-![alt text](images/demon-3.png)
+![alt text](/static/images/demon-3.png)
 
 The start function called by main function seem to handle the outer loop
 
 After choosign the hero code jumps to start function ,which looks like this after cleaning
-![alt text](images/demon-4.png)
+![alt text](/static/images/demon-4.png)
 
 Here is what it is doing
 
@@ -45,43 +45,43 @@ Here is what it is doing
 
 #### wizrd_attack
 
-![alt text](images/demon-5.png)
+![alt text](/static/images/demon-5.png)
 
 #### knight_Attack
 
-![alt text](images/demon-6.png)
+![alt text](/static/images/demon-6.png)
 
 after playing understandign the binary i figure out the pattern we can not fairly defeat the demon
 
 - we first have to loose once to from "Siegwurm" and then chose wizrd to fight the "Wezaemon" , then we can use mizup of cloak and booster to overflow the hp of the Wezaemon (as it is stored in one byte)
   
-  ![alt text](images/demon-7.png)
+  ![alt text](/static/images/demon-7.png)
 
 but the works not end yet , after defeating the demon we free it's allocated memory and return and back in start fight_demon  
-  ![alt text](images/demon-8.png)
+  ![alt text](/static/images/demon-8.png)
 
 when the new memory for name is allocated (as it is 16 byte in size same as previous deleted memory in heap i.e 16 bytes of demon) it is allocated in the same memory chunk as the demon memory. so we can control this memroy to jump anywhere in the code .
 
 there is only one function in code which is giving us shell
-![alt text](images/demon-9.png)
+![alt text](/static/images/demon-9.png)
 
 but there is a check of global wonder_key . and we can not directly jmp to the system lne as we are loading "/bin/sh" in string str .
 
 So we need to somehow update the key to successfully get the shell
 
 after looking around found some functions that
-![alt text](images/demon-10.png)
+![alt text](/static/images/demon-10.png)
 
-![alt text](images/demon-11.png)
+![alt text](/static/images/demon-11.png)
 
-![alt text](images/demon-12.png)
+![alt text](/static/images/demon-12.png)
 
 the wonder land func , call and input function that print take a secret input of hundered size (so no buffer overflow) , it also changes the wonder_key value to the right one but now there is no
  way to call the_pit func So....
 
 after looking for while I found a vulnerability in function
 check_wish
-![alt text](images/demon-13.png)
+![alt text](/static/images/demon-13.png)
 
 we are not loading address of the local_10 , instead we are pushing the value of it directly , which means something like this
 
@@ -101,7 +101,7 @@ now we know how to write 4 bytes to our desired location but now what ....
 
 well the next key is in same function as well
 
-![alt text](images/demon-14.png)
+![alt text](/static/images/demon-14.png)
 
 **flush()** we can overwrite its got entry and by putting its address in the initial value of local_10 , and then when scanf is called we will enter the address of our choice in decimal form and baam we will jump to there
 
