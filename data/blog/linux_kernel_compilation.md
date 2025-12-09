@@ -1,8 +1,20 @@
+---
+title: 'A guide to linux kernel Compilation'
+date: '2025-12-9'
+lastmod: '2025-12-9'
+tags: ['linux kernel' , 'kernel compilation' , 'Operating System' , 'guide']
+draft: false
+images: []
+summary: 'A detailed writeup for Linux kernel compilation'
+authors: ['default']
+---
 
-# About:
+# Linux Kernel Compilation Guide 
+
+## About:
 This is a walkthrough to compiling linux kernel with a custom wrapper of mkdir command .Given to us as our Operating system assignment . To get a know how of linux kernel compilation .     
 
-## **Syscall :**
+## Syscall :
 
 The syscall that we chose was **mkdir** on kernal version 5.1 (***5.15.196**to be exact)*
 
