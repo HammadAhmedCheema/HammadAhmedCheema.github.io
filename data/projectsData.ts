@@ -7,12 +7,6 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'Cyber Archive',
-    description: `A centralized resource and use-case platform tailored specifically for Cyber Security students, highlighting essential tools and concepts.`,
-    imgSrc: '/static/images/cyber-archive.png',
-    href: 'https://cyberarchive.vercel.app/',
-  },
-  {
     title: 'CyberSafe',
     description: `A modern, community-driven cybersecurity awareness and incident reporting platform built with React 19, Tailwind CSS, Supabase (Auth/Database/Storage), and Google Gemini AI.`,
     imgSrc: '/static/images/cyber-awareness.png',
