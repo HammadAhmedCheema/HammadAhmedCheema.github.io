@@ -2,15 +2,14 @@
 title: 'CyberFest 25-PWN-Demon'
 date: '2025-12-09'
 lastmod: '2025-12-09'
-tags: ['pwn' , 'binary exploitation' , 'ctf' , 'GOT' , 'CyberFest25' , 'Byte Overflow']
-draft: false
+tags: ['pwn', 'binary exploitation', 'ctf', 'GOT', 'CyberFest25', 'Byte Overflow']
+draft: true
 images: []
 summary: 'This was the PWN challenge that I created for the CyberFest 25 CTF'
 authors: ['default']
 ---
 
-
-## Solution 
+## Solution
 
 In this challenge we were given binary named demon
 
@@ -54,11 +53,11 @@ Here is what it is doing
 after playing understandign the binary i figure out the pattern we can not fairly defeat the demon
 
 - we first have to loose once to from "Siegwurm" and then chose wizrd to fight the "Wezaemon" , then we can use mizup of cloak and booster to overflow the hp of the Wezaemon (as it is stored in one byte)
-  
+
   ![alt text](/static/images/demon-7.png)
 
 but the works not end yet , after defeating the demon we free it's allocated memory and return and back in start fight_demon  
-  ![alt text](/static/images/demon-8.png)
+ ![alt text](/static/images/demon-8.png)
 
 when the new memory for name is allocated (as it is 16 byte in size same as previous deleted memory in heap i.e 16 bytes of demon) it is allocated in the same memory chunk as the demon memory. so we can control this memroy to jump anywhere in the code .
 
@@ -77,7 +76,7 @@ after looking around found some functions that
 ![alt text](/static/images/demon-12.png)
 
 the wonder land func , call and input function that print take a secret input of hundered size (so no buffer overflow) , it also changes the wonder_key value to the right one but now there is no
- way to call the_pit func So....
+way to call the_pit func So....
 
 after looking for while I found a vulnerability in function
 check_wish
@@ -134,7 +133,7 @@ io.sendlineafter(b'>> ' , b'1')
 io.sendlineafter(b'>> ' , b'1')
 io.sendlineafter(b'>> ' , b'1')
 
-#let balaur heal till byte oveflow and hp<1 
+#let balaur heal till byte oveflow and hp<1
 io.sendlineafter(b'>> ' , b'1')
 io.sendlineafter(b'>> ' , b'3')
 io.sendlineafter(b'>> ' , b'3')
