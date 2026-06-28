@@ -1,7 +1,16 @@
 {
+  "pwn": 1,
+  "binary-exploitation": 1,
+  "ctf": 1,
+  "got": 1,
+  "cyberfest25": 1,
+  "byte-overflow": 1,
+  "linux-kernel": 1,
+  "kernel-compilation": 1,
+  "operating-system": 1,
+  "guide": 2,
   "mitnick-attack": 1,
   "tcp": 1,
   "tcp-hijacking": 1,
-  "seed-lab": 1,
-  "guide": 1
+  "seed-lab": 1
 }
